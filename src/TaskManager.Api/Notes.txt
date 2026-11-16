@@ -1,0 +1,9 @@
+[1] - Initial Idea
+The Api for this will be a simple task management api. Nothing complicated. 
+No complicated software architecture yet.
+
+[2] - 
+
+[3] - 
+
+[4] - 
