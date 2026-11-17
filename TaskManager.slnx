@@ -1,3 +1,8 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path="Dockerfile" />
+    <File Path="README.md" />
+  </Folder>
   <Project Path="src/TaskManager.Api/TaskManager.Api.csproj" />
 </Solution>
