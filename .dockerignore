@@ -1,0 +1,55 @@
+# Visual Studio cache and user-specific files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+[Dd]ebugPublic/
+[Rr]eleases/
+x64/
+x86/
+[Aa]rm/
+[Aa]rm64/
+bld/
+**/[Bb]in/
+**/[Oo]bj/
+
+# Visual Studio generated files
+*.VC.db
+*.VC.VC.opendb
+*.VC.opendb
+*.pidb
+*.pdb
+*.opendb
+*.ilk
+
+# Test results and coverage
+**/TestResults/
+*.trx
+*.coverage
+*.coveragexml
+coverage/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET publish output
+publish/
+wwwroot/lib/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+.git/
+.gitignore
+.dockerignore
