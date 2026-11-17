@@ -16,6 +16,11 @@ Today, I have learned several interesting things about docker, by creating a doc
 * Next, docker context is the set of files that are available to the docker daemon when building an image. This is important because copy paths are relative to the context.
 * Finally, you dont need to copy everything, because folders like bin and obj are auto generated. Saves speed!
 
-[3] - 
+[3] - Running container from image
+docker run -d -p 8080:8080 --name taskmanager taskmanager-api
+-d: detach mode, runs container in background instead of attaching it to a terminal
+-p: port mapping, maps host port to container port, so you can access the container from the host machine
+    format: hostPort:containerPort
+--name: assigns a name to the container, so you can refer to it by name instead of id
 
 [4] - 
