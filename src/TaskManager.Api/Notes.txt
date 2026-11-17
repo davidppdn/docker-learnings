@@ -23,4 +23,9 @@ docker run -d -p 8080:8080 --name taskmanager taskmanager-api
     format: hostPort:containerPort
 --name: assigns a name to the container, so you can refer to it by name instead of id
 
-[4] - 
+[4] - Docker volumes
+Learned about the lifecycle difference between containers and volumees. 
+Files inside contains get destroyed when the container is destroyed.
+A volume is storage separate from the container, stored either on the host machine or in a specific
+location manager by docker. Volumes are persistent, and can be shared between containers. 
+When a container is destroyed, the volume remains, and can be reattached to a new container.
