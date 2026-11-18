@@ -39,3 +39,25 @@ To mount the volumne to a container, use the following:
 docker run -v <volume_name>:<container_path> <image_name>
 the container_path is inside the container where the volume is accessible. Thus, anything
 written to <container_path> will be written to the volume, and thus persist even if the container is destroyed.
+
+[6] - Running Postgres in a container
+docker run -d `
+  --name taskmanager-db `
+  -e POSTGRES_USER=taskmanager `
+  -e POSTGRES_PASSWORD=devpassword `
+  -e POSTGRES_DB=taskmanager `
+  -v taskmanager-postgres:/var/lib/postgresql `
+  -p 5432:5432 `
+  postgres:18
+
+  -e set the environment variables needed for the postgres container to run
+  we expose port 5432, which is the default port for postgres, so we can connect to it from the host machine
+  --name is the name of the container, so we can refer to it by name instead of id
+  -d runs in detach mode, so it runs in the background instead of attaching to a terminal
+
+We connect to it by running:
+docker exec -it taskmanager-db psql -U taskmanager -d taskmanager
+  -it runs the command in interactive mode, so we can interact with the container
+  psql is the postgres command line tool, which we use to connect to the database
+  -U specifies the user to connect as, which is taskmanager
+  -d specifies the database to connect to, which is also taskmanager
