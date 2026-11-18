@@ -29,3 +29,13 @@ Files inside contains get destroyed when the container is destroyed.
 A volume is storage separate from the container, stored either on the host machine or in a specific
 location manager by docker. Volumes are persistent, and can be shared between containers. 
 When a container is destroyed, the volume remains, and can be reattached to a new container.
+
+[5] - Creating a volume and attaching it to a container
+To create a volume, use the command: docker volume create <volume_name>
+To inspect a volume, use the command: docker volume inspect <volume_name>
+The inspect command will give you several details about the volume, including its mount point on the host machine.
+The mount point is the location on the host machine where the volumnes data is stored.
+To mount the volumne to a container, use the following:
+docker run -v <volume_name>:<container_path> <image_name>
+the container_path is inside the container where the volume is accessible. Thus, anything
+written to <container_path> will be written to the volume, and thus persist even if the container is destroyed.
