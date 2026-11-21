@@ -75,3 +75,32 @@ docker network inspect <network_name>
 When joining a network, docker autoassigns ip addresses to the containers. Because of this,
 it is better that we let docker auto assign the network ip addresses and use container names.
 This is because the ip addresses can change when containers are restarted, but the names will remain the same.
+
+[8] - The tech discussion
+I learned about two interesting... libraries? Npgsql and EF core.
+Npgsql is a .NET data provider for postgres, that allows .NET applications to connect to postgres databases. 
+It is a low level library that provides a way to execute SQL commands and retrieve results.
+EF core is an object relational mapper (ORM) that allows .NET applications to interact with databases using 
+objects instead of SQL commands. The two belong to different layers of absteraction, and are usually
+used in tandem. For the sake of the project, and for learning a bit of sql as well, I will only use
+Npgsql for now.
+
+[9] - Connection pooling
+This is unrelated but interesting nonetheless, so I am writing it down. 
+A connection pool is a cache of database connections that can be reused, 
+instead of creating a new connection every time one is needed. When a connection is requested, 
+the pool will return an available connection from the pool. When the connection is done, instead
+of closing it, it is returned to the pool fo rreuse. The benefits of this is that it 
+reduces the overhead of creating and destroying connections, which can be expensive,
+while also improving performance by reducing the time it takes to establish a connection.
+Additionally, it also means that there isnt constant connection between the application and the database, 
+which can be a security risk.
+
+[10] - Docker build
+Small intervention to the note. 
+docker build -t <image_name> <path_to_dockerfile> 
+is a command that builds a docker image from a dockerfile. 
+The -t flag tags the image with a name, and the path is the location of the dockerfile.
+When you update the dockerfile, or even the code, you need to rebuild the image, and then run a new container from the new image.
+Because the image contains the application code, and the container is an instance of the image, 
+the container will not update when the image is updated.

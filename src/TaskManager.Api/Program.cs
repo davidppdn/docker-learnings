@@ -1,4 +1,5 @@
 using TaskManager.Api.Models;
+using Npgsql;
 
 public static class Program
 {
@@ -9,8 +10,24 @@ public static class Program
     };
 
 
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
+        var connectionStringBuilder = new NpgsqlConnectionStringBuilder
+        {
+            Host = "taskmanager-db", // Use the container name as the host
+            Port = 5432,
+            Database = "taskmanager",
+            Username = "taskmanager",
+            Password = "devpassword"
+        };
+
+        var connectionString = connectionStringBuilder.ConnectionString;
+        await using (var connection = new NpgsqlConnection(connectionString))
+        {
+            await connection.OpenAsync();
+            Console.WriteLine("Successfully connected to PostgreSQL!");
+        }
+
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddOpenApi();
