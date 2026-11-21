@@ -61,3 +61,17 @@ docker exec -it taskmanager-db psql -U taskmanager -d taskmanager
   psql is the postgres command line tool, which we use to connect to the database
   -U specifies the user to connect as, which is taskmanager
   -d specifies the database to connect to, which is also taskmanager
+
+[7] - Docker networks
+Since docker containers run on their own environments, localhost is not the hosts localhost, but the containers.
+Because of that, there needs to be some network configuration to allow containers to talk to each other.
+That is what a docker network is for.
+
+docker network create <network_name>
+docker network connect <network_name> <container_name>
+docker run -d --name <container_name> --network <network_name> -p <host_port>:<container_port> <image_name>
+docker network inspect <network_name>
+
+When joining a network, docker autoassigns ip addresses to the containers. Because of this,
+it is better that we let docker auto assign the network ip addresses and use container names.
+This is because the ip addresses can change when containers are restarted, but the names will remain the same.
