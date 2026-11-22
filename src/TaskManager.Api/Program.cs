@@ -28,6 +28,31 @@ public static class Program
         var result = await command.ExecuteScalarAsync();
         Console.WriteLine($"Connected to database: {result}");
 
+        await using var createTableCommand = dataSource.CreateCommand(@"
+            CREATE TABLE IF NOT EXISTS tasks (
+    id UUID PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT,
+    completed BOOLEAN NOT NULL DEFAULT FALSE
+);");
+
+        await createTableCommand.ExecuteNonQueryAsync();
+
+        await using (var readTableCommand = dataSource.CreateCommand("SELECT * FROM tasks;"))
+        await using (var readTableReader = await readTableCommand.ExecuteReaderAsync())
+        {
+            while (await readTableReader.ReadAsync())
+            {
+                var id = readTableReader.GetGuid(0);
+                var title = readTableReader.GetString(1);
+                var description = readTableReader.IsDBNull(2)
+                    ? null
+                    : readTableReader.GetString(2);
+                var completed = readTableReader.GetBoolean(3);
+                Console.WriteLine($"Row: Id={id}, Title={title}, Description={description}, Completed={completed}");
+            }
+        }
+
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddOpenApi();
