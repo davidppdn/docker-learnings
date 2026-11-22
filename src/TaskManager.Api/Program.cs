@@ -22,11 +22,11 @@ public static class Program
         };
 
         var connectionString = connectionStringBuilder.ConnectionString;
-        await using (var connection = new NpgsqlConnection(connectionString))
-        {
-            await connection.OpenAsync();
-            Console.WriteLine("Successfully connected to PostgreSQL!");
-        }
+        await using var dataSource = NpgsqlDataSource.Create(connectionString);
+
+        await using var command = dataSource.CreateCommand("SELECT current_database();");
+        var result = await command.ExecuteScalarAsync();
+        Console.WriteLine($"Connected to database: {result}");
 
         var builder = WebApplication.CreateBuilder(args);
 
